@@ -30,6 +30,7 @@ The type if node is oddevennode ,and not Node .
 */
 #include <stdlib.h>
 #include <stdio.h>
+#include<malloc.h>
 
 struct oddevennode{
 	int data;
@@ -39,6 +40,57 @@ struct oddevennode{
 };
 
 int * oddeven_sll(struct oddevennode *head){
-
+	if (head==NULL)
 	return NULL;
+	else
+	{
+		int* arr = (int*)malloc(sizeof(int) * 2);
+		struct oddevennode * temp;
+		struct oddevennode * temp1;
+		struct oddevennode * temp2;
+		int odd = 0, even = 0;
+		temp = head;
+		temp1 = NULL;
+		temp2 = NULL;
+		while (temp != NULL)
+		{
+			if ((temp->data) % 2 != 0)
+			{
+				if (odd==0)
+				temp1 = temp;
+				
+				else
+				{
+					while (temp1->random != NULL)
+					{
+						temp1 = temp1->random;
+					}
+					temp1->random = temp;
+				}
+				odd ++ ;
+
+			}
+			else
+			{
+				if (even == 0)
+					temp2 = temp;
+				else
+				{
+					while (temp2->random != NULL)
+					{
+						temp2 = temp2->random;
+					}
+					temp2->random = temp;
+				}
+				even++;
+
+			}
+			temp = temp->next;
+		}
+		arr[0] = odd;
+		arr[1] = even;
+		return arr;
+
+
+	}
 }
